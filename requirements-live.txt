@@ -1,0 +1,2 @@
+# Optional Linux uinput backend; this tested version requires Python 3.11+.
+evdev==2.0.0

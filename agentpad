@@ -1,0 +1,8 @@
+#!/usr/bin/env python3
+"""Run the agentpad CLI from a checkout."""
+import sys
+
+sys.dont_write_bytecode = True
+from controller import main
+
+raise SystemExit(main())
