@@ -61,7 +61,7 @@ In a second terminal, replace the example socket path below with the one printed
 ./agentpad play experiments/reskate/neutral.json --socket /path/from/ready/pad.sock
 ```
 
-Use matching client and server versions in a private socket directory owned by your account. The server plays one sequence at a time. Keep the client connected with its write side open for the duration of its move. Closing the write side signals cancellation. Disconnecting cancels that move and releases the controls. Ctrl-C in the server terminal removes the virtual device. After a forced kill, start with a fresh private directory.
+Use matching client and server versions in a private socket directory owned by your account. Wait for one play command to finish before another agent takes a turn. Overlapping requests can time out while the pad is busy, and an abandoned queued move is dropped. Keep the client connected with its write side open for the duration of its move. Closing the write side signals cancellation. Disconnecting cancels that move and releases the controls. Ctrl-C in the server terminal removes the virtual device. After a forced kill, start with a fresh private directory.
 
 ## Run the tests
 

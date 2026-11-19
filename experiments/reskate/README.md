@@ -19,7 +19,7 @@ Choose a new trial name under an existing directory. On Linux the recorder
 writes both files in a temporary directory on the same filesystem, then
 publishes them together using `renameat2(RENAME_NOREPLACE)`. An occupied name,
 including an empty directory, makes the command fail. A filesystem or libc
-without that operation also returns an error.
+without that operation also returns an error. A sudden power loss can still leave an incomplete archive on disk.
 
 - `inputs.json` contains the exact submitted bytes. Each frame replaces the
   previous snapshot. Omitted controls are neutral. The recorder and replay
@@ -27,8 +27,8 @@ without that operation also returns an error.
   neutral final frame.
 - `observation.json` contains the lowercase SHA-256 of those input bytes, the
   result (`landing`, `miss`, or `unknown`), and the note. Each file must be a
-  regular file of at most 1 MiB. The reader rejects symbolic links to either
-  file.
+  regular file of at most 1 MiB. The reader rejects a symbolic link at either
+  filename. Use a trusted location for the archive directory.
 - Replay checks the hash and passes the same input bytes to AgentPad's dry-run
   formatter. Its stdout matches `./agentpad play FILE`. Use the archived input file to check the digest because dry-run output may expand omitted controls.
 
