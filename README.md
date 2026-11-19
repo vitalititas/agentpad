@@ -46,7 +46,7 @@ python3 -m venv .venv
 python -m pip install -r requirements-live.txt
 ```
 
-Use an ordinary user account that already has the required device access. Live button and stick events go to local applications listening for gamepads, which may include Steam or a desktop controller mapper.
+AgentPad advertises USB vendor ID `045e` and product ID `028e` for Xbox 360 controller mapping. Write access to `/dev/uinput` allows a process to create other virtual input devices too. Use an ordinary user account that already has the required device access. Live button and stick events go to local applications listening for gamepads, which may include Steam or a desktop controller mapper.
 
 For one play, `./agentpad play FILE --real` creates a pad, plays the sequence, and disconnects. For agent turns or games that discover controllers on startup, keep one pad attached. Run this in the first terminal:
 
@@ -61,7 +61,7 @@ In a second terminal, replace the example socket path below with the one printed
 ./agentpad play experiments/reskate/neutral.json --socket /path/from/ready/pad.sock
 ```
 
-Use matching client and server versions in a private socket directory owned by your account. The server plays one sequence at a time. Keep the client connected for the duration of its move. Disconnecting cancels that move and releases the controls. Ctrl-C in the server terminal removes the virtual device. After a forced kill, start with a fresh private directory.
+Use matching client and server versions in a private socket directory owned by your account. The server plays one sequence at a time. Keep the client connected with its write side open for the duration of its move. Closing the write side signals cancellation. Disconnecting cancels that move and releases the controls. Ctrl-C in the server terminal removes the virtual device. After a forced kill, start with a fresh private directory.
 
 ## Run the tests
 
